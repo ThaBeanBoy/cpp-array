@@ -34,13 +34,11 @@ public:
     void loop(std::function<void(int, int)> loop);
 
     void loopReverse(std::function<void(int)> loop);
-    
+
     void loopReverse(std::function<void(int, int)> loop);
 
     // Return value of the given index
-    int valueAt(int int_indx) const;
-
-    void changeValue(int int_index, int int_newVal);
+    int& at(int int_indx);
 
     // Add new element to the array
     intArr& addElement(int int_newVal);

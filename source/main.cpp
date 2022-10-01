@@ -8,8 +8,12 @@ int main() {
     system("cls");
     intArr arr({ 1, 2, 3, 4, 5 });
 
-    arr.loopReverse([](int val) {
-        cout << "Value : " << val << endl;
+    arr.at(0) = -1000;
+    arr[4] = 1000;
+
+    arr.loop([](int val, int index) {
+        cout << "Value : " << val << endl
+            << "Index : " << index << endl << endl;
         });
 
     // arr.loopReverse([](int val, int indx) {

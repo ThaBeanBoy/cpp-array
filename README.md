@@ -12,6 +12,7 @@
     - [length()](#length)
     - [loop()](#loop)
     - [loopReverse()](#loopreverse)
+    - [at()](#at)
 
 ## Downloading
 
@@ -87,6 +88,8 @@ arr.loop([](int val, int index /* Optional Argument */) {
     });
 
 //EXPECTED OUTPUT:
+//----------------
+
 // Value : 1
 // Index : 0
 
@@ -118,6 +121,8 @@ arr.loopReverse([](int val, int index /* Optional Argument */) {
     });
 
 //EXPECTED OUTPUT:
+//----------------
+
 // Value : 5
 // Index : 4
 
@@ -132,4 +137,38 @@ arr.loopReverse([](int val, int index /* Optional Argument */) {
 
 // Value : 1
 // Index : 0
+```
+
+### at()
+
+This allows you to acces any element in the array with it's index, and you also have the ability to change the value
+
+```cpp
+intArr arr({ 1, 2, 3, 4, 5 });
+
+arr.at(0) = -1000;
+arr[4] = 1000;
+
+arr.loop([](int val, int index) {
+    cout << "Value : " << val << endl
+        << "Index : " << index << endl << endl;
+    });
+
+//EXPECTED OUTPUT:
+//----------------
+
+// Value : -1000
+// Index : 0
+
+// Value : 2
+// Index : 1
+
+// Value : 3
+// Index : 2
+
+// Value : 4
+// Index : 3
+
+// Value : 1000
+// Index : 4
 ```

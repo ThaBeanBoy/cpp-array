@@ -104,18 +104,14 @@ void intArr::loopReverse(std::function<void(int, int)> loop) {
         loop(_arr[i], i);
 }
 
-// Return value of the given index
-int intArr::valueAt(int int_indx) const {
-    if (int_indx >= _length) {
-        exit(-1);
-    }
-    return _arr[int_indx];
-}
+int& intArr::at(int int_indx) {
+    if (0 <= int_indx && int_indx < _length)
+        return _arr[int_indx];
 
-void intArr::changeValue(int int_index, int int_newVal) {
-    _arr[int_index] = int_newVal;
+    // ! ERR THROW POINT
+    // Throw an out of range error
+    throw 0;
 }
-
 // Add new element to the array
 intArr& intArr::addElement(int int_newVal) {
     allocateForNewData({ int_newVal });
@@ -164,12 +160,7 @@ intArr intArr::operator--() {}
 
 
 int& intArr::operator[](int i) {
-    if (0 <= i && i < _length)
-        return _arr[i];
-
-    // ! ERR THROW POINT
-    // Throw an out of range error
-    throw 0;
+    return at(i);
 }
 
 void intArr::allocateForNewData(std::initializer_list<int> dataSet) {
