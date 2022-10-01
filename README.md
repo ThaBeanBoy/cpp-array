@@ -81,7 +81,7 @@ This is an alternative way of looping through the array. <span style='color:#95e
 ```cpp
 intArr arr({ 1, 2, 3, 4, 5 });
 
-arr.loop([](int val, int index) {
+arr.loop([](int val, int index /* Optional Argument */) {
     cout << "Value : " << val << endl
         << "Index : " << index << endl << endl;
     });
@@ -112,7 +112,7 @@ This is an alternative way of looping through the array. <span style='color:#95e
 ```cpp
 intArr arr({ 1, 2, 3, 4, 5 });
 
-arr.loopReverse([](int val, int index) {
+arr.loopReverse([](int val, int index /* Optional Argument */) {
     cout << "Value : " << val << endl
         << "Index : " << index << endl << endl;
     });

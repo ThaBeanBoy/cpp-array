@@ -29,9 +29,13 @@ public:
     int length() const;
 
     // Loop through elements in array
-    void loop(std::function<void(int, int)>) const;
+    void loop(std::function<void(int)> loop);
 
-    void loopReverse(void(*loop)(int, int)) const;
+    void loop(std::function<void(int, int)> loop);
+
+    void loopReverse(std::function<void(int)> loop);
+    
+    void loopReverse(std::function<void(int, int)> loop);
 
     // Return value of the given index
     int valueAt(int int_indx) const;

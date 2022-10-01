@@ -81,7 +81,12 @@ intArr::~intArr() {
 // Loop through elements in array
 int intArr::length() const { return _length; }
 
-void intArr::loop(std::function<void(int, int)> loop) const {
+void intArr::loop(std::function<void(int)> loop) {
+    for (int i = 0; i < _length; i++)
+        loop(_arr[i]);
+}
+
+void intArr::loop(std::function<void(int, int)> loop) {
     int indx = 0;
     for (int i = 0; i < _length; i++) {
         loop(_arr[i], indx);
@@ -89,8 +94,12 @@ void intArr::loop(std::function<void(int, int)> loop) const {
     }
 }
 
-void intArr::loopReverse(void(*loop)(int, int)) const {
-    // int indx = _length - 1;
+void intArr::loopReverse(std::function<void(int)> loop) {
+    for (int i = (_length - 1); i >= 0; i--)
+        loop(_arr[i]);
+}
+
+void intArr::loopReverse(std::function<void(int, int)> loop) {
     for (int i = (_length - 1); i >= 0; i--)
         loop(_arr[i], i);
 }
