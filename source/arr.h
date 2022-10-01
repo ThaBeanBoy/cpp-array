@@ -2,6 +2,7 @@
 #define arr_h
 
 #include <initializer_list>
+#include <functional>
 #include <iostream>
 
 class intArr {
@@ -28,7 +29,7 @@ public:
     int length() const;
 
     // Loop through elements in array
-    void loop(void(*loop)(int, int)) const;
+    void loop(std::function<void(int, int)>) const;
 
     void loopReverse(void(*loop)(int, int)) const;
 

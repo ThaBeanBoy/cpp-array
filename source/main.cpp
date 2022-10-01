@@ -6,11 +6,16 @@ using namespace std;
 
 int main() {
     system("cls");
-    intArr arr(5);
+    intArr arr({ 1, 2, 3, 4, 5 });
 
-    // arr[0] = 30;
-    cout << arr[0] << endl;
-    cout << arr.length();
+    arr.loopReverse([](int val, int index) {
+        cout << "Value : " << val << endl
+            << "Index : " << index << endl << endl;
+        });
+
+    // arr.loopReverse([](int val, int indx) {
+    //     cout << "Value : " << val << "\nIndex : " << indx << "\n\n";
+    //     });
 
     return 0;
 }
