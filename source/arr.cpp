@@ -1,5 +1,19 @@
 #include "arr.h"
 
+// Constructor Utility function
+void intArr::copyFromInitialiserList(std::initializer_list<int> list) {
+    if (_length != list.size()) {
+        std::cerr << "DEV ERR : Unable to copy from given initialiser list";
+        exit(-1);
+    }
+
+    int int_indx = 0;
+    for (int elem : list) {
+        _arr[int_indx] = elem;
+        int_indx++;
+    }
+}
+
 // # CONSTRUCTORS
 // Initializing array with values
 intArr::intArr(std::initializer_list<int> arrOfNums) {
@@ -8,11 +22,7 @@ intArr::intArr(std::initializer_list<int> arrOfNums) {
     _arr = new int[_length];
 
     // Saving the number in the array
-    int int_indx = 0;
-    for (int elem : arrOfNums) {
-        _arr[int_indx] = elem;
-        int_indx++;
-    }
+    copyFromInitialiserList(arrOfNums);
 }
 
 // set value to the given arrClass
@@ -31,6 +41,25 @@ void intArr::operator=(intArr arr_RHS) {
     for (int i = 0; i < _length; i++)
         _arr[i] = arr_RHS[i];
 }
+
+// ! There seems to be a problem, I may need to debug
+// set value to the given initializer list
+// intArr& intArr::operator=(std::initializer_list<int> arrOfNums) {
+//     // Saving length
+//     _length = arrOfNums.size();
+
+//     // deallocating the _arr
+//     delete _arr;
+//     _arr = nullptr;
+
+//     // reallocating _arr
+//     _arr = new int[_length];
+
+//     // copying values
+//     copyFromInitialiserList(arrOfNums);
+
+//     std::cout << "Im supposed to copy from an initializer list bruv";
+// }
 
 // Initializing the array with it's size
 intArr::intArr(int int_size) {
@@ -91,11 +120,17 @@ intArr& intArr::addElement(intArr arrClass) {
 }
 
 // # OPERATOR FUNCTIONS
-intArr intArr::operator+(const intArr& RHS) {
-    if (_length != RHS._length)
-        throw "can't add two arrays that have different lengths";
+// intArr intArr::operator+(const intArr& RHS) {
+//     if (_length != RHS._length)
+//         throw "can't add two arrays that have different lengths";
 
 
+// }
+
+int operator>>(int int_LHS, intArr me) {
+
+
+    return int_LHS;
 }
 
 // Add a new element to the array
@@ -104,16 +139,23 @@ intArr& intArr::operator<<(std::initializer_list<int> arrOfNums) { return addEle
 intArr& intArr::operator<<(intArr arrClass) { return addElement(arrClass); }; // Concat another array
 // Add a new element to the array
 
-intArr intArr::operator>>(int int_newVal) {}
-void intArr::operator>>(std::initializer_list<int> arrOfNums) {}
-// Concat another array
-void intArr::operator>>(intArr arrClass) {}
+// intArr intArr::operator>>(int int_newVal) {}
+// void intArr::operator>>(std::initializer_list<int> arrOfNums) {}
+// // Concat another array
+// void intArr::operator>>(intArr arrClass) {}
 
 // Delete the last element in the array
 intArr intArr::operator--() {}
-intArr intArr::operator++() {}
 
-int& intArr::operator[](int i) { return _arr[i]; }
+
+int& intArr::operator[](int i) {
+    if (0 <= i && i < _length)
+        return _arr[i];
+
+    // ! ERR THROW POINT
+    // Throw an out of range error
+    throw 0;
+}
 
 void intArr::allocateForNewData(std::initializer_list<int> dataSet) {
     // Initialising the copy array
