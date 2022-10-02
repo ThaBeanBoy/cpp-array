@@ -26,12 +26,12 @@ intArr::intArr(std::initializer_list<int> arrOfNums) {
 }
 
 // set value to the given arrClass
-void intArr::operator=(intArr arr_RHS) {
+intArr::intArr(const intArr& arr_RHS) {
     // Saving length
     _length = arr_RHS._length;
 
     // deallocating the _arr
-    delete _arr;
+    delete[] _arr;
     _arr = nullptr;
 
     // reallocating _arr
@@ -39,7 +39,12 @@ void intArr::operator=(intArr arr_RHS) {
 
     // copying values
     for (int i = 0; i < _length; i++)
-        _arr[i] = arr_RHS[i];
+        _arr[i] = arr_RHS._arr[i];
+
+    bool sameLocation = _arr == arr_RHS._arr;
+    std::cout << "this's array location : " << _arr << std::endl
+        << "copy's array location : " << arr_RHS._arr << std::endl
+        << "same location         : " << (sameLocation ? "True" : "False") << std::endl << std::endl;
 }
 
 // ! There seems to be a problem, I may need to debug
@@ -113,17 +118,19 @@ int& intArr::at(int int_indx) {
     throw 0;
 }
 // Add new element to the array
-intArr& intArr::addElement(int int_newVal) {
-    allocateForNewData({ int_newVal });
-    return *this;
+intArr intArr::concat(int int_newVal) {
+    intArr temp = *this;
+    temp.allocateForNewData({ int_newVal });
+
+    return temp;
 }
 // Add new elements to the array
-intArr& intArr::addElement(std::initializer_list<int> arrOfNums) {
+intArr& intArr::concat(std::initializer_list<int> arrOfNums) {
     allocateForNewData(arrOfNums);
     return *this;
 }
 // Add elements from another array
-intArr& intArr::addElement(intArr arrClass) {
+intArr& intArr::concat(intArr arrClass) {
     for (int i = 0; i < arrClass.length(); i++)
         allocateForNewData({ arrClass[i] });
 
@@ -145,9 +152,9 @@ int operator>>(int int_LHS, intArr me) {
 }
 
 // Add a new element to the array
-intArr& intArr::operator<<(int int_newVal) { return addElement(int_newVal); }
-intArr& intArr::operator<<(std::initializer_list<int> arrOfNums) { return addElement(arrOfNums); };
-intArr& intArr::operator<<(intArr arrClass) { return addElement(arrClass); }; // Concat another array
+intArr intArr::operator<<(int int_newVal) { return concat(int_newVal); }
+intArr& intArr::operator<<(std::initializer_list<int> arrOfNums) { return concat(arrOfNums); };
+intArr& intArr::operator<<(intArr arrClass) { return concat(arrClass); }; // Concat another array
 // Add a new element to the array
 
 // intArr intArr::operator>>(int int_newVal) {}
@@ -159,38 +166,29 @@ intArr& intArr::operator<<(intArr arrClass) { return addElement(arrClass); }; //
 intArr intArr::operator--() {}
 
 
-int& intArr::operator[](int i) {
-    return at(i);
+int& intArr::operator[](int int_indx) {
+    return at(int_indx);
 }
 
 void intArr::allocateForNewData(std::initializer_list<int> dataSet) {
-    // Initialising the copy array
-    int* copy = new int[_length];
-    const int copyLength = _length;
+    int* temp = new int[dataSet.size() + _length];
 
-    // Copying from the array into the copy array
-    for (int i = 0; i < _length; i++) {
-        copy[i] = _arr[i];
+    // Copying original values
+    this->loop([temp](int val, int indx) {
+        temp[indx] = val;
+        });
+
+    // Copying new values
+    int indx = _length;
+    for (int newVal : dataSet) {
+        temp[indx] = newVal;
+        indx++;
     }
 
-    // Resizing the arr and increasing length
-    delete _arr;
-    _length += dataSet.size();
+    // Delete original
+    delete[] _arr;
     _arr = nullptr;
-    _arr = new int[_length];
 
-    // copying from the copy array into the arr
-    for (int i = 0; i < copyLength; i++)
-        _arr[i] = copy[i];
-
-    // Adding value to the array
-    int int_indx = copyLength;
-    for (int data : dataSet) {
-        _arr[int_indx] = data;
-        int_indx++;
-    }
-
-    // deleting the copy array
-    delete copy;
-    copy = nullptr;
+    _length += dataSet.size();
+    _arr = temp;
 }

@@ -1,12 +1,12 @@
-# cpp-arr
+# [ cpp-arr ]
 
 ## Table Of Content
 
-- [cpp-arr](#cpp-arr)
+- [[cpp-arr]](#-cpp-arr-)
   - [Table Of Content](#table-of-content)
+  - [Description](#description)
   - [Downloading](#downloading)
   - [Using IntArr in your file](#using-intarr-in-your-file)
-  - [Description](#description)
   - [Initialisation](#initialisation)
   - [Array Methods](#array-methods)
     - [length()](#length)
@@ -14,13 +14,13 @@
     - [loopReverse()](#loopreverse)
     - [at()](#at)
 
-## Downloading
-
-## Using IntArr in your file
-
 ## Description
 
 This is to help abstract alot of the boring pointers involved in making dynamic arrays in c++. It also provides a few utility functions that make working with arrays easier.
+
+## Downloading
+
+## Using IntArr in your file
 
 ## Initialisation
 
@@ -172,3 +172,7 @@ arr.loop([](int val, int index) {
 // Value : 1000
 // Index : 4
 ```
+
+### concat()
+
+This method allows you to concat new information into the array

@@ -12,7 +12,7 @@ public:
     intArr(std::initializer_list<int> arrOfNums = { 0 });
 
     // set value to the given arrClass
-    void operator=(intArr arr_RHS);
+    intArr(const intArr& arr_RHS);
 
     // ! There seems to be a problem, I may need to debug
     // When user wants to instantiate, it should look like this intArr arr = {1, 2, 3, 4, 5}; 
@@ -41,28 +41,40 @@ public:
     int& at(int int_indx);
 
     // Add new element to the array
-    intArr& addElement(int int_newVal);
+    intArr concat(int int_newVal);
 
     // Add new elements to the array
-    intArr& addElement(std::initializer_list<int> arrOfNums);
+    intArr& concat(std::initializer_list<int> arrOfNums);
 
     // Add elements from another array
-    intArr& addElement(intArr arrClass);
+    intArr& concat(intArr arrClass);
 
-    intArr& addAtBegining(int int_newVal);
+    intArr& concatStart(int int_newVal);
 
-    intArr& addAtBegining(std::initializer_list<int> arrOfNums);
+    intArr& concatStart(std::initializer_list<int> arrOfNums);
 
-    intArr& addAtBegining(intArr arrClass);
+    intArr& concatStart(intArr arrClass);
+
+    intArr& pop();
+
+    intArr& pop(int index);
+
+    intArr& pop(std::initializer_list<int> indexs);
+
+    intArr filter(std::function<bool(int value, int index)> filterFunction);
+
+    // !It would be cool to have a map function
+    // template <typename K>
+    // arr<K> map(std::function<bool(T element,int index)> mapFuction);
 
     // # OPERATOR FUNCTIONS
     // intArr operator+(const intArr& RHS);
 
     // Return value at array
-    int operator[](int int_indx) const;
+    int& operator[](int int_indx);
     // ADDING ELEMENTS TO THE END OF THE ARRAY
     // Add a new element to the array
-    intArr& operator<<(int int_newVal);
+    intArr operator<<(int int_newVal);
     intArr& operator<<(std::initializer_list<int> arrOfNums);
     intArr& operator<<(intArr arrClass); // Concat another array
     // Add a new element to the array
@@ -82,8 +94,6 @@ public:
 
     intArr operator==(intArr RHS);
     intArr operator!=(intArr RHS);
-
-    int& operator[](int i);
 
 private:
     int* _arr;
