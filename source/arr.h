@@ -61,7 +61,13 @@ public:
 
     intArr& pop(std::initializer_list<int> indexs);
 
+    intArr filter(std::function<bool(int value)> filterFunction);
+
     intArr filter(std::function<bool(int value, int index)> filterFunction);
+
+    intArr every(std::function<bool(int value)> filterFunction);
+
+    intArr every(std::function<bool(int value, int index)> filterFunction);
 
     // !It would be cool to have a map function
     // template <typename K>
