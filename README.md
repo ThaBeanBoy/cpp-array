@@ -13,6 +13,7 @@
     - [loop()](#loop)
     - [loopReverse()](#loopreverse)
     - [at()](#at)
+    - [concat()](#concat)
 
 ## Description
 
@@ -175,4 +176,62 @@ arr.loop([](int val, int index) {
 
 ### concat()
 
-This method allows you to concat new information into the array
+This method allows you to concat new information into the array. <span style='color:#f7746d; font-weight: bold'>This method does not change the existing arrays, but returns a new array, containing the values of the joined arrays / new elements.</span> <br/>
+
+```cpp
+intArr concated_arr({ 1, 2, 3, 4, 5 });
+
+concated_arr.concat(6).loop([](int val, int index) {
+    cout << val << endl;
+    });
+
+//EXPECTED OUTPUT:
+//----------------
+
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+```
+
+To permanently concat an array, you can use the assignment operator.
+
+```cpp
+intArr concated_arr({ 1, 2, 3, 4, 5 });
+
+cout << endl << "PRE CONCAT" << endl;
+// PRE CONCAT
+concated_arr.loop([](int val, int index) {
+    cout << val << endl;
+    });
+
+// PERMANENT CONCAT
+concated_arr = concated_arr.concat(6);
+
+
+cout << endl << "PERMANENT CONCAT" << endl;
+// POST CONCAT
+concated_arr.loop([](int val, int index) {
+    cout << val << endl;
+    });
+
+//EXPECTED OUTPUT:
+//----------------
+
+// PRE CONCAT
+// 1
+// 2
+// 3
+// 4
+// 5
+
+// PERMANENT CONCAT
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+```

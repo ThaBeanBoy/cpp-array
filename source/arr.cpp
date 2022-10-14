@@ -38,9 +38,6 @@ intArr::intArr(const intArr& arr_RHS) {
         _arr[i] = arr_RHS._arr[i];
 
     bool sameLocation = _arr == arr_RHS._arr;
-    std::cout << "this's array location : " << _arr << std::endl
-        << "copy's array location : " << arr_RHS._arr << std::endl
-        << "same location         : " << (sameLocation ? "True" : "False") << std::endl << std::endl;
 }
 
 intArr& intArr::operator=(const intArr& arr_rhs) {
@@ -135,6 +132,7 @@ int& intArr::at(int int_indx) {
     // Throw an out of range error
     throw 0;
 }
+
 // Add new element to the array
 intArr intArr::concat(int int_newVal) {
     intArr temp = *this;

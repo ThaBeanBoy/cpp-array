@@ -7,15 +7,21 @@ using namespace std;
 int main() {
     system("cls");
 
-    intArr arr({ 1, 2, 3, 4, 5 });
-    intArr concated_arr = arr;
-    arr[0] = 1000;
+    intArr concated_arr({ 1, 2, 3, 4, 5 });
 
-    cout << "Changes" << endl;
+    cout << endl << "PRE CONCAT" << endl;
+    // PRE CONCAT
+    concated_arr.loop([](int val, int index) {
+        cout << val << endl;
+        });
 
-    // arr.concat(6);
+    // PERMANENT CONCAT
+    concated_arr = concated_arr.concat(6);
 
-    arr.loop([](int val, int index) {
+
+    cout << endl << "PERMANENT CONCAT" << endl;
+    // POST CONCAT
+    concated_arr.loop([](int val, int index) {
         cout << val << endl;
         });
 
