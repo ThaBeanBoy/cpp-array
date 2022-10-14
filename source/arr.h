@@ -4,6 +4,7 @@
 #include <initializer_list>
 #include <functional>
 #include <iostream>
+#include <cassert>
 
 class intArr {
 public:
@@ -16,7 +17,7 @@ public:
 
     // ! There seems to be a problem, I may need to debug
     // When user wants to instantiate, it should look like this intArr arr = {1, 2, 3, 4, 5}; 
-    // intArr& operator=(std::initializer_list<int> arrOfNums);
+    intArr& operator=(const intArr& arr_rhs);
 
     // Initializing the array with it's size
     intArr(int int_size);

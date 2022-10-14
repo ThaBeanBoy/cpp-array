@@ -30,10 +30,6 @@ intArr::intArr(const intArr& arr_RHS) {
     // Saving length
     _length = arr_RHS._length;
 
-    // deallocating the _arr
-    delete[] _arr;
-    _arr = nullptr;
-
     // reallocating _arr
     _arr = new int[_length];
 
@@ -45,6 +41,27 @@ intArr::intArr(const intArr& arr_RHS) {
     std::cout << "this's array location : " << _arr << std::endl
         << "copy's array location : " << arr_RHS._arr << std::endl
         << "same location         : " << (sameLocation ? "True" : "False") << std::endl << std::endl;
+}
+
+intArr& intArr::operator=(const intArr& arr_rhs) {
+    if (this == &arr_rhs)
+        return *this;
+
+    // Delete anything that might've been in the array
+    delete _arr;
+    _arr = nullptr;
+
+    // Set the same length as the rhs
+    _length = arr_rhs._length;
+
+    // Alloc mem
+    _arr = new int[_length];
+
+    // Copy values
+    for (int i = 0; i < _length; i++)
+        _arr[i] = arr_rhs._arr[i];
+
+    return *this;
 }
 
 // ! There seems to be a problem, I may need to debug
@@ -65,6 +82,7 @@ intArr::intArr(const intArr& arr_RHS) {
 
 //     std::cout << "Im supposed to copy from an initializer list bruv";
 // }
+
 
 // Initializing the array with it's size
 intArr::intArr(int int_size) {
