@@ -176,17 +176,20 @@ arr.loop([](int val, int index) {
 
 ### concat()
 
-This method allows you to concat new information into the array. <span style='color:#f7746d; font-weight: bold'>This method does not change the existing arrays, but returns a new array, containing the values of the joined arrays / new elements.</span> <br/>
+This method allows you to concat new data into the array.
 
 ```cpp
 intArr concated_arr({ 1, 2, 3, 4, 5 });
 
-concated_arr.concat(6).loop([](int val, int index) {
+concated_arr.concat(6);
+
+concated_arr.loop([](int val, int index) {
     cout << val << endl;
     });
 
 //EXPECTED OUTPUT:
 //----------------
+
 
 // 1
 // 2
@@ -196,23 +199,13 @@ concated_arr.concat(6).loop([](int val, int index) {
 // 6
 ```
 
-To permanently concat an array, you can use the assignment operator.
+if you don't want the array to change, then you can disable hard concat
 
 ```cpp
 intArr concated_arr({ 1, 2, 3, 4, 5 });
 
-cout << endl << "PRE CONCAT" << endl;
-// PRE CONCAT
-concated_arr.loop([](int val, int index) {
-    cout << val << endl;
-    });
+concated_arr.concat(6, false);
 
-// PERMANENT CONCAT
-concated_arr = concated_arr.concat(6);
-
-
-cout << endl << "PERMANENT CONCAT" << endl;
-// POST CONCAT
 concated_arr.loop([](int val, int index) {
     cout << val << endl;
     });
@@ -220,18 +213,9 @@ concated_arr.loop([](int val, int index) {
 //EXPECTED OUTPUT:
 //----------------
 
-// PRE CONCAT
 // 1
 // 2
 // 3
 // 4
 // 5
-
-// PERMANENT CONCAT
-// 1
-// 2
-// 3
-// 4
-// 5
-// 6
 ```

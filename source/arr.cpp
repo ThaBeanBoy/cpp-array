@@ -134,14 +134,38 @@ int& intArr::at(int int_indx) {
 }
 
 // Add new element to the array
-intArr intArr::concat(int int_newVal) {
+intArr intArr::concat(int int_newVal, bool hardConcat) {
+    if (hardConcat) {
+        // Concat the actual array
+        _length += 1;
+        int* temp = new int[_length];
+
+        // Copying original values
+        this->loop([temp](int val, int indx) {
+            temp[indx] = val;
+            });
+
+        // Saving the given value
+        temp[_length - 1] = int_newVal;
+
+
+        // Delete original
+        delete[] _arr;
+        _arr = nullptr;
+
+        _arr = temp;
+
+        return *this;
+    }
+
+    // return a copy of concated array
     intArr temp = *this;
     temp.allocateForNewData({ int_newVal });
 
     return temp;
 }
 // Add new elements to the array
-intArr& intArr::concat(std::initializer_list<int> arrOfNums) {
+intArr intArr::concat(std::initializer_list<int> arrOfNums) {
     allocateForNewData(arrOfNums);
     return *this;
 }
@@ -154,22 +178,16 @@ intArr& intArr::concat(intArr arrClass) {
 }
 
 // # OPERATOR FUNCTIONS
-// intArr intArr::operator+(const intArr& RHS) {
-//     if (_length != RHS._length)
-//         throw "can't add two arrays that have different lengths";
+
+// int operator>>(int int_LHS, intArr me) {
 
 
+//     return int_LHS;
 // }
-
-int operator>>(int int_LHS, intArr me) {
-
-
-    return int_LHS;
-}
 
 // Add a new element to the array
 intArr intArr::operator<<(int int_newVal) { return concat(int_newVal); }
-intArr& intArr::operator<<(std::initializer_list<int> arrOfNums) { return concat(arrOfNums); };
+// intArr& intArr::operator<<(std::initializer_list<int> arrOfNums) { return concat(arrOfNums, true); };
 intArr& intArr::operator<<(intArr arrClass) { return concat(arrClass); }; // Concat another array
 // Add a new element to the array
 

@@ -42,10 +42,10 @@ public:
     int& at(int int_indx);
 
     // Add new element to the array
-    intArr concat(int int_newVal);
+    intArr concat(int int_newVal, bool hardConcat = true);
 
     // Add new elements to the array
-    intArr& concat(std::initializer_list<int> arrOfNums);
+    intArr concat(std::initializer_list<int> arrOfNums);
 
     // Add elements from another array
     intArr& concat(intArr arrClass);
