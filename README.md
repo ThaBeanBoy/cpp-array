@@ -204,8 +204,14 @@ if you don't want the array to change, then you can disable hard concat
 ```cpp
 intArr concated_arr({ 1, 2, 3, 4, 5 });
 
-concated_arr.concat(6, false);
+// Looping on concated array, disabled hard concat
+cout << "Disabled hard concat" << endl;
+concated_arr.concat(6, false).loop([](int val, int index) {
+    cout << val << endl;
+    });
 
+cout << endl << "Original array" << endl;
+// Looping on the original
 concated_arr.loop([](int val, int index) {
     cout << val << endl;
     });
@@ -213,9 +219,20 @@ concated_arr.loop([](int val, int index) {
 //EXPECTED OUTPUT:
 //----------------
 
+// Disabled hard concat
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+
+// Original array
 // 1
 // 2
 // 3
 // 4
 // 5
 ```
+
+In the example above, I just wanted to loop over an array with a concated element wothout actually changing the actual array itself.
